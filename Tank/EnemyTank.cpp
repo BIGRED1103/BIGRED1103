@@ -5,12 +5,12 @@ EnemyTank::EnemyTank()
 	int m_x = rand() % Graphic::GetBattleGround().GetWidth();
 	int m_y = rand() % Graphic::GetBattleGround().GetHeight();
 	m_pos.Set(m_x, m_y);
-			`			
+			
 	m_color = WHITE;
 	m_direc = (Dir)(rand() % 4);
 	m_step = rand() % 2 + 1;
 
-	m_changeDirecProbality = 30;
+	m_changeDirecProbality = 50;
 }
 
 EnemyTank::~EnemyTank()
@@ -83,30 +83,34 @@ void EnemyTank::Move()
 	{
 	case UP:
 		m_y -= m_step;
-		if (m_y - 6 < battle_Y1)
+		if (m_y - 8 < battle_Y1)
 		{
-			m_y = battle_Y2 - 6;
+ 			m_y = battle_Y2 - 6;
+// 			m_y += m_step;
 		}
 		break;
 	case DOWN:
 		m_y += m_step;
-		if (m_y + 6 > battle_Y2)
+		if (m_y + 8 > battle_Y2)
 		{
-			m_y = battle_Y1 + 6;
+ 			m_y = battle_Y1 + 6;
+// 			m_y -= m_step;
 		}
 		break;
 	case LEFT:
 		m_x -= m_step;
-		if (m_x - 6 < battle_X1)
+		if (m_x - 8 < battle_X1)
 		{
 			m_x = battle_X2 - 6;
+// 			m_x += m_step;
 		}
 		break;
 	case RIGHT:
 		m_x += m_step;
-		if (m_x + 6 > battle_X2)
+		if (m_x + 8 > battle_X2)
 		{
 			m_x = battle_X1 + 6;
+		// 	m_x -= m_step;
 		}
 		break;
 	}

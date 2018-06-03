@@ -2,7 +2,7 @@
 
 MainTank::MainTank() 
 {
-	m_pos.Set(300, 300);
+	m_pos.Set(300, 460);
 
 	this->m_color = YELLOW;
 	m_direc = UP;
@@ -63,28 +63,28 @@ void MainTank::Move()
 		m_y -= m_step;
 		if (m_y - 6 < battle_Y1)
 		{
-			m_y = battle_Y2 - 6;
+			m_y += m_step;
 		}
 		break;
 	case DOWN:
 		m_y += m_step;
 		if (m_y + 6 > battle_Y2)
 		{
-			m_y = battle_Y1 + 6;
+			m_y -= m_step;
 		}
 		break;
 	case LEFT:
 		m_x -= m_step;
 		if (m_x - 6 < battle_X1)
 		{
-			m_x = battle_X2 - 6;
+			m_x += m_step;
 		}
 		break;
 	case RIGHT:
 		m_x += m_step;
 		if (m_x + 6 > battle_X2)
 		{
-			m_x = battle_X1 + 6;
+			m_x -= m_step;
 		}
 		break;
 	}

@@ -3,29 +3,29 @@
 <pre>
 <h1>Build Log</h1>
 <h3>
---------------------Configuration: Tank - Win32 Debug--------------------
+--------------------Configuration: Tank - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP135F.tmp" with contents
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSPD464.tmp" with contents
 [
-/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/Tank.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"G:\MFC_Proj\Tank\EnemyTank.cpp"
+/nologo /ML /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Release/Tank.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"H:\GIT\Tank\MainTank.cpp"
 ]
-Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP135F.tmp" 
-Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP1360.tmp" with contents
+Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSPD464.tmp" 
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSPD465.tmp" with contents
 [
-kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/Tank.pdb" /debug /machine:I386 /out:"Debug/Tank.exe" /pdbtype:sept 
-.\Debug\EnemyTank.obj
-.\Debug\Graphic.obj
-.\Debug\main.obj
-.\Debug\MainTank.obj
-.\Debug\point.obj
-.\Debug\rect.obj
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:no /pdb:"Release/Tank.pdb" /machine:I386 /out:"Release/Tank.exe" 
+.\Release\EnemyTank.obj
+.\Release\Graphic.obj
+.\Release\main.obj
+.\Release\MainTank.obj
+.\Release\point.obj
+.\Release\rect.obj
 ]
-Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP1360.tmp"
+Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSPD465.tmp"
 <h3>Output Window</h3>
 Compiling...
-EnemyTank.cpp
+MainTank.cpp
 Linking...
 
 
