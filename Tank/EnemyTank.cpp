@@ -10,7 +10,7 @@ EnemyTank::EnemyTank()
 	m_direc = (Dir)(rand() % 4);
 	m_step = rand() % 2 + 1;
 
-	m_changeDirecProbality = 40;
+	m_changeDirecProbality = 30;
 }
 
 EnemyTank::~EnemyTank()
