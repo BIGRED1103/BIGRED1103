@@ -1,11 +1,11 @@
 #ifndef _ENEMYTANK_H_
 #define _ENEMYTANK_H_
 
-#include "Vehicle.h"
+#include "Object.h"
 
 #define ENEMYTANK_MAX 10
 
-class EnemyTank : public Vehicle
+class EnemyTank : public Object
 {
 public:
 	EnemyTank();
@@ -14,6 +14,7 @@ public:
 public:
 	void Display();
 	void Move();
+	BOOL IsDisappear();
 	
 protected:
 	void CalculateSphere();

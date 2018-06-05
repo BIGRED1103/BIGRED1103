@@ -1,11 +1,11 @@
 #ifndef _MAINTANK_H_
 #define _MAINTANK_H_
 
-#include "Vehicle.h"
+#include "Object.h"
 #include "Model/point.h"
 #include "Model/rect.h"
 
-class MainTank : public Vehicle
+class MainTank : public Object
 {
 public:
 	MainTank();
@@ -19,6 +19,7 @@ public:
 
 	void Display();
 	void Move();
+	BOOL IsDisappear();
 	
 protected:
 	void CalculateSphere();

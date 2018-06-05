@@ -145,3 +145,8 @@ void MainTank::CalculateSphere()
 		break;
 	}
 }
+
+BOOL MainTank::IsDisappear()
+{
+	return m_bDisappear;
+}

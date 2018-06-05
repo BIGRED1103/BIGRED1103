@@ -1,11 +1,8 @@
-#pragma warning(disable:4996)  
-
 #include <iostream>  
 #include <conio.h>  
 #include <time.h>  
 
 #include "Graphic.h"  
-#include "Vehicle.h"
 #include "MainTank.h" 
 #include "EnemyTank.h" 
 
@@ -19,7 +16,7 @@ void main()
 	Graphic::DrawBattleGround();
 
     MainTank mainTank;
-	Vehicle *pVehicle[ENEMYTANK_MAX];
+	Object *pVehicle[ENEMYTANK_MAX];
 
 	int nIndexEnemy;
 	for (nIndexEnemy = 0; nIndexEnemy < ENEMYTANK_MAX; nIndexEnemy++)

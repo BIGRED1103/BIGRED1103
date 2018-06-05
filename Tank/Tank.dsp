@@ -125,15 +125,15 @@ SOURCE=.\MainTank.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\Object.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\Model\point.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\Model\rect.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Vehicle.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

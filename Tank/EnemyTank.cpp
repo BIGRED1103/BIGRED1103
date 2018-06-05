@@ -147,3 +147,8 @@ void EnemyTank::RandChangeDirec()
 		m_direc = (Dir)(rand() % 4);
 	}
 }
+
+BOOL EnemyTank::IsDisappear()
+{
+	return m_bDisappear;
+}
