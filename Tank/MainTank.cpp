@@ -7,6 +7,7 @@ MainTank::MainTank()
 	this->m_color = YELLOW;
 	m_direc = UP;
 	m_step = 5;
+	m_bDisappear = FALSE;
 }
 
 MainTank::~MainTank()
@@ -29,28 +30,12 @@ int MainTank::GetStep()
 	return m_step;
 }
 
-void MainTank::Display()
-{
-	COLORREF fillcolor_save = getfillcolor();
-	COLORREF color_save = getcolor();
- 	setfillcolor(m_color);
-	setcolor(m_color);
-
- 	DrawTankBody();
-	CalculateSphere();
-
- 	setfillcolor(fillcolor_save);
-	setcolor(color_save);
-}
 
 void MainTank::Move()
 {
 	int m_y, m_x;
 	m_x = this->m_pos.GetX();
 	m_y = this->m_pos.GetY();
-
-// 	Point m_startPos = Graphic::m_rectBattleGround.GetStartPoint();
-// 	Point m_endPos = Graphic::m_rectBattleGround.GetEndPoint();
 
 	int battle_X1 = BATTLE_GROUND_X1;
 	int battle_Y1 = BATTLE_GROUND_Y1;
@@ -92,7 +77,7 @@ void MainTank::Move()
 	this->m_pos.SetX(m_x);
 }
 
-void MainTank::DrawTankBody()
+void MainTank::DrawBody()
 {
 	int m_x = this->m_pos.GetX();
 	int m_y = this->m_pos.GetY();
@@ -149,4 +134,10 @@ void MainTank::CalculateSphere()
 BOOL MainTank::IsDisappear()
 {
 	return m_bDisappear;
+}
+
+void MainTank::Shoot(list<Object* > & lstBullets)
+{
+	NBullet * pBullet = new NBullet(m_pos, m_direc, m_color);
+	lstBullets.push_back(pBullet);
 }

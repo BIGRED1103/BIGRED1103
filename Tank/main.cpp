@@ -5,6 +5,10 @@
 #include "Graphic.h"  
 #include "MainTank.h" 
 #include "EnemyTank.h" 
+#include "NBullet.h"
+
+
+#include <list>
 
 using namespace std;  
 
@@ -23,6 +27,10 @@ void main()
 	{
 		pVehicle[nIndexEnemy] = new EnemyTank();
 	}
+
+	list<Object * > lstBullets;
+	lstBullets.clear();
+	list<Object *>::iterator it_Bullet;
 	
 	int nStep;
     bool loop = true;  
@@ -58,7 +66,8 @@ void main()
                 loop = false;  
                 break;  
 				// Space  
-            case 32:  
+            case 32: 
+				mainTank.Shoot(lstBullets);
                 break;  
 				// Enter  
             case 13:  
@@ -96,6 +105,18 @@ void main()
 				pVehicle[nIndexEnemy]->Move();
 				pVehicle[nIndexEnemy]->Display();
 			}
+
+			for (it_Bullet = lstBullets.begin(); it_Bullet != lstBullets.end(); )
+			{
+				(*it_Bullet)->Move();
+				if ((*it_Bullet)->IsDisappear())
+				{
+					delete (*it_Bullet);
+					it_Bullet = lstBullets.erase(it_Bullet);
+				}
+				(*it_Bullet)->Display();
+				it_Bullet++;
+			}
         }  
 		
         Sleep(50);  
@@ -106,6 +127,12 @@ void main()
 		delete pVehicle[nIndexEnemy];
 		pVehicle[nIndexEnemy] = NULL;
 	}
+
+	for (it_Bullet = lstBullets.begin(); it_Bullet != lstBullets.end(); it_Bullet++)
+	{
+		delete *it_Bullet;
+	}
+	lstBullets.clear();
 	
     Graphic::Destroy();  
 }  

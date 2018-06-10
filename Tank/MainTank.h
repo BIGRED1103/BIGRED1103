@@ -1,11 +1,11 @@
 #ifndef _MAINTANK_H_
 #define _MAINTANK_H_
 
-#include "Object.h"
+#include "Vehicle.h"
 #include "Model/point.h"
 #include "Model/rect.h"
 
-class MainTank : public Object
+class MainTank : public Vehicle
 {
 public:
 	MainTank();
@@ -17,15 +17,15 @@ public:
 	int GetStep();
 	void SetColor(COLORREF _color);
 
-	void Display();
+	void Shoot(list<Object* > & lstBullets);
+
 	void Move();
 	BOOL IsDisappear();
 	
 protected:
 	void CalculateSphere();
-	void DrawTankBody();
+	void DrawBody();
 };
-
 
 
 #endif

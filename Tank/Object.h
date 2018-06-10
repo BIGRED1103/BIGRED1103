@@ -13,10 +13,11 @@ class Object
 public:
 	virtual void Display()=0;
 	virtual void Move()=0;
+	virtual BOOL IsDisappear()=0;
 
 protected:
 	virtual void CalculateSphere()=0;
-	virtual BOOL IsDisappear()=0;
+	virtual void DrawBody()=0;
 
 	Point m_pos;
 	Rect m_rectSphere; //ÊÆÁ¦·¶Î§

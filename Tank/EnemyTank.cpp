@@ -2,8 +2,9 @@
 
 EnemyTank::EnemyTank()
 {
-	int m_x = rand() % Graphic::GetBattleGround().GetWidth();
-	int m_y = rand() % Graphic::GetBattleGround().GetHeight();
+	int m_x = rand() % (Graphic::GetBattleGround().GetWidth() - 8) + 8; //保证敌方坦克不会在战场外出生
+	int m_y = rand() % (Graphic::GetBattleGround().GetHeight() - 8) + 8;
+
 	m_pos.Set(m_x, m_y);
 			
 	m_color = WHITE;
@@ -11,6 +12,7 @@ EnemyTank::EnemyTank()
 	m_step = rand() % 2 + 1;
 
 	m_changeDirecProbality = 50;
+	m_bDisappear = FALSE;
 }
 
 EnemyTank::~EnemyTank()
@@ -18,7 +20,7 @@ EnemyTank::~EnemyTank()
 
 }
 
-void EnemyTank::DrawTankBody()
+void EnemyTank::DrawBody()
 {
 	int m_x = this->m_pos.GetX();
 	int m_y = this->m_pos.GetY();
@@ -52,20 +54,6 @@ void EnemyTank::DrawTankBody()
 	}
 }
 
-void EnemyTank::Display()
-{
-	COLORREF fillcolor_save = getfillcolor();
-	COLORREF color_save = getcolor();
-	setfillcolor(m_color);
-	setcolor(m_color);
-	
-	DrawTankBody();
-	CalculateSphere();
-	
-	setfillcolor(fillcolor_save);
-	setcolor(color_save);
-}
-
 void EnemyTank::Move()
 {
 	int m_y, m_x;
@@ -85,33 +73,35 @@ void EnemyTank::Move()
 		m_y -= m_step;
 		if (m_y - 8 < battle_Y1)
 		{
- 			m_y = battle_Y2 - 6;
-// 			m_y += m_step;
+			m_y += m_step;
+			m_direc = (Dir)((rand() % 3 + 1 + (int)m_direc) % 4);
 		}
 		break;
 	case DOWN:
 		m_y += m_step;
 		if (m_y + 8 > battle_Y2)
 		{
- 			m_y = battle_Y1 + 6;
-// 			m_y -= m_step;
+			m_y -= m_step;
+			m_direc = (Dir)((rand() % 3 + 1 + (int)m_direc) % 4);
 		}
 		break;
 	case LEFT:
 		m_x -= m_step;
 		if (m_x - 8 < battle_X1)
 		{
-			m_x = battle_X2 - 6;
-// 			m_x += m_step;
+			m_x += m_step;
+			m_direc = (Dir)((rand() % 3 + 1 + (int)m_direc) % 4);
 		}
 		break;
 	case RIGHT:
 		m_x += m_step;
 		if (m_x + 8 > battle_X2)
 		{
-			m_x = battle_X1 + 6;
-		// 	m_x -= m_step;
+ 		 	m_x -= m_step;
+			m_direc = (Dir)((rand() % 3 + 1 + (int)m_direc) % 4);
 		}
+		break;
+	default:
 		break;
 	}
 	this->m_pos.SetY(m_y);

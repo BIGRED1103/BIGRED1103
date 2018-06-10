@@ -101,6 +101,10 @@ SOURCE=.\MainTank.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\NBullet.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Model\point.cpp
 # End Source File
 # Begin Source File
@@ -111,6 +115,10 @@ SOURCE=.\Model\rect.cpp
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=.\Bullet.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\EnemyTank.h
@@ -125,6 +133,10 @@ SOURCE=.\MainTank.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\NBullet.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\Object.h
 # End Source File
 # Begin Source File
@@ -134,6 +146,10 @@ SOURCE=.\Model\point.h
 # Begin Source File
 
 SOURCE=.\Model\rect.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Vehicle.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"
