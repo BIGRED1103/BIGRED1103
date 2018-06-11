@@ -69,7 +69,7 @@ void NBullet::Move()
 		}
 		break;
 	case RIGHT:
-		this->m_pos.SetY(m_x + m_step);
+		this->m_pos.SetX(m_x + m_step);
 		this->CalculateSphere();
 		pointEnd = m_rectSphere.GetEndPoint();
 		if (pointEnd.GetX() > BATTLE_GROUND_X2)

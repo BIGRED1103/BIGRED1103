@@ -113,6 +113,7 @@ void main()
 				{
 					delete (*it_Bullet);
 					it_Bullet = lstBullets.erase(it_Bullet);
+					continue;
 				}
 				(*it_Bullet)->Display();
 				it_Bullet++;
