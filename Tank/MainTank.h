@@ -17,7 +17,7 @@ public:
 	int GetStep();
 	void SetColor(COLORREF _color);
 
-	void Shoot(list<Object* > & lstBullets);
+	void Shoot(list<Bullet* > & lstBullets);
 
 	void Move();
 	BOOL IsDisappear();

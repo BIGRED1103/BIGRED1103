@@ -18,9 +18,11 @@ public:
 protected:
 	virtual void CalculateSphere()=0;
 	virtual void DrawBody()=0;
+	virtual void Boom()=0;
 
 	Point m_pos;
 	Rect m_rectSphere; //ÊÆÁ¦·¶Î§
+	BOOL m_bBoom;
 	BOOL m_bDisappear;
 	COLORREF m_color;
 	Dir m_direc;

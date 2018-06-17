@@ -6,7 +6,7 @@
 class NBullet : public Bullet
 {
 public:
-	NBullet(Point pos, Dir dir, COLORREF color);
+	NBullet(Point pos, Dir dir, COLORREF color, int nStep);
 	NBullet() {};
 	~NBullet() {};
 	
@@ -15,6 +15,7 @@ public:
 protected:
 	virtual void CalculateSphere();
 	virtual void DrawBody();
+	virtual void Boom();
 
 private:
 	int m_nRadius;

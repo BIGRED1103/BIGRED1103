@@ -3,7 +3,7 @@
 
 #include "Vehicle.h"
 
-#define ENEMYTANK_MAX 10
+#define ENEMYTANK_MAX 20
 
 class EnemyTank : public Vehicle
 {
@@ -13,6 +13,7 @@ public:
 	
 public:
 	void Move();
+	void Shoot(list<Bullet* > & lstBullets);
 	
 protected:
 	void CalculateSphere();

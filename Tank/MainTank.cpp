@@ -8,6 +8,9 @@ MainTank::MainTank()
 	m_direc = UP;
 	m_step = 5;
 	m_bDisappear = FALSE;
+	m_bBoom = FALSE;
+
+	CalculateSphere();
 }
 
 MainTank::~MainTank()
@@ -75,6 +78,8 @@ void MainTank::Move()
 	}
 	this->m_pos.SetY(m_y);
 	this->m_pos.SetX(m_x);
+
+	CalculateSphere();
 }
 
 void MainTank::DrawBody()
@@ -136,8 +141,8 @@ BOOL MainTank::IsDisappear()
 	return m_bDisappear;
 }
 
-void MainTank::Shoot(list<Object* > & lstBullets)
+void MainTank::Shoot(list<Bullet* > & lstBullets)
 {
-	NBullet * pBullet = new NBullet(m_pos, m_direc, m_color);
+	NBullet * pBullet = new NBullet(m_pos, m_direc, m_color, 20);
 	lstBullets.push_back(pBullet);
 }

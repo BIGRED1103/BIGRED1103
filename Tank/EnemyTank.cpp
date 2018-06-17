@@ -1,6 +1,7 @@
 #include "EnemyTank.h"
 
 EnemyTank::EnemyTank()
+:Vehicle()
 {
 	int m_x = rand() % (Graphic::GetBattleGround().GetWidth() - 8) + 8; //保证敌方坦克不会在战场外出生
 	int m_y = rand() % (Graphic::GetBattleGround().GetHeight() - 8) + 8;
@@ -13,6 +14,10 @@ EnemyTank::EnemyTank()
 
 	m_changeDirecProbality = 50;
 	m_bDisappear = FALSE;
+	m_bBoom = FALSE;
+	m_nRadius = 7;
+
+	CalculateSphere();
 }
 
 EnemyTank::~EnemyTank()
@@ -56,6 +61,11 @@ void EnemyTank::DrawBody()
 
 void EnemyTank::Move()
 {
+	if (m_bBoom)
+	{
+		return ;
+	}
+
 	int m_y, m_x;
 	m_x = this->m_pos.GetX();
 	m_y = this->m_pos.GetY();
@@ -74,7 +84,7 @@ void EnemyTank::Move()
 		if (m_y - 8 < battle_Y1)
 		{
 			m_y += m_step;
-			m_direc = (Dir)((rand() % 3 + 1 + (int)m_direc) % 4);
+			m_direc = (Dir)((rand() % 3 + 1 + (int)m_direc) % 4); //碰到边缘改变方向，
 		}
 		break;
 	case DOWN:
@@ -106,6 +116,8 @@ void EnemyTank::Move()
 	}
 	this->m_pos.SetY(m_y);
 	this->m_pos.SetX(m_x);
+
+	CalculateSphere();
 }
 
 void EnemyTank::CalculateSphere()
@@ -132,7 +144,7 @@ void EnemyTank::RandChangeDirec()
 {
 	int seed = rand() % m_changeDirecProbality;
 	
-	if (seed == m_changeDirecProbality / 2)
+	if (seed == m_changeDirecProbality / 2)  //有Probality分之1的概率改变方向
 	{
 		m_direc = (Dir)(rand() % 4);
 	}
@@ -141,4 +153,19 @@ void EnemyTank::RandChangeDirec()
 BOOL EnemyTank::IsDisappear()
 {
 	return m_bDisappear;
+}
+
+void EnemyTank::Shoot(list<Bullet* > & lstBullets)
+{
+	if (m_bBoom)
+	{
+		return ;
+	}
+
+	int seed = rand() % (m_changeDirecProbality);
+	if (seed == m_changeDirecProbality / 2)  //(1/2 包含在 2/3内)
+	{
+		NBullet * pBullet = new NBullet(m_pos, m_direc, m_color, m_step + 5);
+		lstBullets.push_back(pBullet);
+	}
 }

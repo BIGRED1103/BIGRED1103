@@ -12,7 +12,7 @@
 
 using namespace std;  
 
-void main()  
+void main()
 {  
 	srand((unsigned)time(NULL)); //随机种子
 
@@ -20,17 +20,28 @@ void main()
 	Graphic::DrawBattleGround();
 
     MainTank mainTank;
-	Object *pVehicle[ENEMYTANK_MAX];
+	Rect rectTemp;
+	
+	/**初始化敌军坦克**/
+	Vehicle *pVehicle;
+	list<Vehicle *> lstVehicle;
+	list<Vehicle *>::iterator it_Vehicle;
+	lstVehicle.clear();
 
 	int nIndexEnemy;
 	for (nIndexEnemy = 0; nIndexEnemy < ENEMYTANK_MAX; nIndexEnemy++)
 	{
-		pVehicle[nIndexEnemy] = new EnemyTank();
+		pVehicle = new EnemyTank();
+		lstVehicle.push_back(pVehicle);
+		pVehicle = NULL;
 	}
 
-	list<Object * > lstBullets;
+	list<Bullet * > lstBullets;
 	lstBullets.clear();
-	list<Object *>::iterator it_Bullet;
+	list<Bullet *>::iterator it_Bullet;
+
+	list<Bullet * > lstEnemyBullets;
+	lstEnemyBullets.clear();
 	
 	int nStep;
     bool loop = true;  
@@ -100,40 +111,83 @@ void main()
 			Graphic::DrawBattleGround();  
             mainTank.Display();
 			
-			for (nIndexEnemy = 0; nIndexEnemy < ENEMYTANK_MAX; nIndexEnemy++)
+			for (it_Vehicle = lstVehicle.begin(); it_Vehicle != lstVehicle.end(); it_Vehicle++)
 			{
-				pVehicle[nIndexEnemy]->Move();
-				pVehicle[nIndexEnemy]->Display();
+				(*it_Vehicle)->Move();
+				(*it_Vehicle)->Shoot(lstEnemyBullets);
+				(*it_Vehicle)->Display();
+				if ((*it_Vehicle)->IsDisappear())
+				{
+					delete (*it_Vehicle);
+					it_Vehicle = lstVehicle.erase(it_Vehicle);
+					continue;
+				}
 			}
 
-			for (it_Bullet = lstBullets.begin(); it_Bullet != lstBullets.end(); )
+			for (it_Bullet = lstBullets.begin(); it_Bullet != lstBullets.end(); it_Bullet++)
 			{
 				(*it_Bullet)->Move();
+				for (it_Vehicle = lstVehicle.begin(); it_Vehicle != lstVehicle.end(); it_Vehicle++)
+				{
+					//碰撞检测
+		 			if((*it_Bullet)->CrashCheck((*it_Vehicle)->GetSphere()))	  //使用父类承接子类，只能调用父类中声明的公有方法
+					{
+						(*it_Vehicle)->SetBoom();
+						(*it_Bullet)->SetBoom();
+						break;
+					}
+				}
+
+				(*it_Bullet)->Display();
 				if ((*it_Bullet)->IsDisappear())
 				{
 					delete (*it_Bullet);
 					it_Bullet = lstBullets.erase(it_Bullet);
 					continue;
+				}  
+			}
+
+			for (it_Bullet = lstEnemyBullets.begin(); it_Bullet != lstEnemyBullets.end(); it_Bullet++)
+			{
+				(*it_Bullet)->Move();
+				//碰撞检测
+				if((*it_Bullet)->CrashCheck(mainTank.GetSphere()))	  
+				{
+					// mainTank.SetBoom();
+					(*it_Bullet)->SetBoom();
 				}
+
 				(*it_Bullet)->Display();
-				it_Bullet++;
+				if ((*it_Bullet)->IsDisappear())
+				{
+					delete (*it_Bullet);
+					it_Bullet = lstEnemyBullets.erase(it_Bullet);
+					continue;
+				}  
 			}
         }  
 		
         Sleep(50);  
     }  
 
-	for (nIndexEnemy = 0; nIndexEnemy < ENEMYTANK_MAX; nIndexEnemy++)
+	for (it_Vehicle = lstVehicle.begin(); it_Vehicle != lstVehicle.end(); it_Vehicle++)
 	{
-		delete pVehicle[nIndexEnemy];
-		pVehicle[nIndexEnemy] = NULL;
+		delete (*it_Vehicle);
+		*it_Vehicle = NULL;
 	}
 
 	for (it_Bullet = lstBullets.begin(); it_Bullet != lstBullets.end(); it_Bullet++)
 	{
 		delete *it_Bullet;
+		it_Bullet = NULL;
+	}
+
+	for (it_Bullet = lstEnemyBullets.begin(); it_Bullet != lstEnemyBullets.end(); it_Bullet++)
+	{
+		delete *it_Bullet;
 	}
 	lstBullets.clear();
+	lstEnemyBullets.clear();
 	
     Graphic::Destroy();  
 }  
